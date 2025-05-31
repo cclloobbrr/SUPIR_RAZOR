@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="content">
+    <h2>Популярные товары</h2>
+    <section class="products">
+        <article class="product-card">
+            <img src="~/images/product1.jpg" alt="Название товара">
+            <h3>Название товара</h3>
+            <p>Описание товара...</p>
+            <span class="price">999 ₽</span>
+            <button>В корзину</button>
+        </article>
+        <!-- Повторить для других товаров -->
+    </section>
+</div>
+
+<aside class="ads">
+    <h5>Здесь могла быть ваша реклама</h5>
+    <section>
+        <article>
+            <h6>Крутая реклама</h6>
+        </article>
+        <!-- Другие рекламные блоки -->
+    </section>
+</aside>
+
+@section Styles {
+    <style>
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            padding: 20px 0;
+        }
+    </style>
+}

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - МойСайт</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SUPIR_RAZOR.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">МойСайт</a>
+            <nav class="nav">
+                <ul>
+                    <li><a asp-page="/Index">Главная</a></li>
+                    <li><a asp-page="/About">О нас</a></li>
+                    <li><a asp-page="/Services">Услуги</a></li>
+                    <li><a asp-page="/Contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            <button class="btn">Войти</button>
+        </div>
+    </header>
+
+    <div class="container main-container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-copyright">© @DateTime.Now.Year МойСайт. Все права защищены.</div>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a asp-page="/Privacy">Политика конфиденциальности</a></li>
+                    <li><a asp-page="/Terms">Условия использования</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Styles", required: false)
+</body>
+</html>
