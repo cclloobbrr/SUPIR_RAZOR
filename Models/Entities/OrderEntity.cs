@@ -8,7 +8,7 @@
 
         public bool Status { get; set; }
 
-        public List<ProductOrderEntity> Product_Order_Quantity { get; set; } = [];
+        public List<ProductOrderEntity> ProductsOrders { get; set; } = [];
 
         public Guid CustomerId { get; set; }
 

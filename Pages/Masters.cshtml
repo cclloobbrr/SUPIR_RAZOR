@@ -1,0 +1,90 @@
+﻿@page
+@model SUPIR_RAZOR.Pages.MastersModel
+@{
+    ViewData["Title"] = "Masters";
+}
+
+<!-- Сортировка -->
+<div class="sort-buttons">
+    <form method="get">
+        <button type="submit" name="handler" value="SortByNameASC">A-Z ↑</button>
+        <button type="submit" name="handler" value="SortByNameDESC">Z-A ↓</button>
+        <button type="submit" name="handler" value="SortByPhoneASC">Phone ↑</button>
+        <button type="submit" name="handler" value="SortByPhoneDESC">Phone ↓</button>
+    </form>
+</div>
+
+
+<!-- Поиск по ID -->
+<form method="get">
+    <input type="text" name="id" placeholder="Enter ID" />
+    <button type="submit" name="handler" value="SearchById">Search by ID</button>
+</form>
+
+<!-- Поиск по имени -->
+<form method="get">
+    <input type="text" name="name" placeholder="Enter Name" />
+    <button type="submit" name="handler" value="SearchByName">Search by Name</button>
+</form>
+
+<!-- Поиск по телефону -->
+<form method="get">
+    <input type="text" name="phone" placeholder="Enter Phone" />
+    <button type="submit" name="handler" value="SearchByPhone">Search by Phone</button>
+</form>
+
+
+
+<!-- Форма добавления -->
+<form method="post">
+    <div>
+        <label>
+            Name:
+            <input asp-for="NewMaster.Name" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Phone:
+            <input asp-for="NewMaster.PhoneNumber" />
+        </label>
+    </div>
+    <button type="submit">Add Master</button>
+</form>
+
+<!-- Таблица с данными -->
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+    </tr>
+    @foreach (var master in Model.Masters)
+    {
+        <tr>
+            <td>@master.Id</td>
+            <td>@master.Name</td>
+            <td>@master.PhoneNumber</td>
+            <td>
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="id" value="@master.Id" />
+                    <button type="submit" onclick="return confirm('Delete this master?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Форма обновления -->
+<form method="post" asp-page-handler="Update">
+    <div>
+        <label>Master ID: <input type="text" name="id" required /></label>
+    </div>
+    <div>
+        <label>New Name (leave empty to keep current): <input asp-for="UpdateMaster.Name" /></label>
+    </div>
+    <div>
+        <label>New Phone (leave empty to keep current): <input asp-for="UpdateMaster.PhoneNumber" /></label>
+    </div>
+    <button type="submit">Update Master</button>
+</form>

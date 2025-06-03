@@ -1,0 +1,31 @@
+﻿@page
+@model SUPIR_RAZOR.Pages.OrdersModel
+@{
+    ViewData["Title"] = "Masters";
+}
+
+<!-- Таблица с данными -->
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Customer Name</th>
+    </tr>
+    @foreach (var order in Model.Orders)
+    {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.Date</td>
+            <td>@order.Status</td>
+            <td>@order.Customer.Name</td>
+            <td>
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="id" value="@order.Id" />
+                    <button type="submit" onclick="return confirm('Delete this master?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+

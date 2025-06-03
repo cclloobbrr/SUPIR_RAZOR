@@ -142,3 +142,123 @@ main {
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
+////////////////////////
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.masters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.master-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    padding: 15px;
+    gap: 15px;
+    align-items: center;
+}
+
+    .master-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+.master-avatar {
+    font-size: 40px;
+    color: #3498db;
+}
+
+.master-info {
+    flex-grow: 1;
+}
+
+    .master-info h3 {
+        margin: 0 0 5px 0;
+        color: #2c3e50;
+    }
+
+    .master-info p {
+        margin: 0;
+        color: #7f8c8d;
+        font-size: 14px;
+    }
+
+.master-id {
+    font-size: 12px;
+    color: #95a5a6;
+    margin-top: 5px;
+}
+
+.master-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn-action {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.edit-btn {
+    color: #3498db;
+}
+
+    .edit-btn:hover {
+        background: #ebf5fb;
+    }
+
+.delete-btn {
+    color: #e74c3c;
+}
+
+    .delete-btn:hover {
+        background: #fdedec;
+    }
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+
