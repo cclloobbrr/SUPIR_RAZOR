@@ -87,8 +87,7 @@ namespace SUPIR_RAZOR.Pages
             if (!ModelState.IsValid)
             {
                 Masters = await _repository.GetAll();
-                ModelState.AddModelError("", "You have not entered the data");
-                return RedirectToPage(); ;
+                return RedirectToPage();
             }
 
             await _repository.Add(Guid.NewGuid(), NewMaster.Name, NewMaster.PhoneNumber);

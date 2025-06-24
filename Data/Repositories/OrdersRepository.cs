@@ -29,18 +29,57 @@ namespace SUPIR_RAZOR.Data.Repositories
         }
 
         //Добавление
-        public async Task Add(Guid id, DateTime date, bool status, Guid customerId)
+        public async Task Add(Guid id, DateTime date, bool status, Guid customerId, Dictionary<Guid, int> orderQuantities)
         {
-            var orderEntity = new OrderEntity
-            {
-                Id = id,
-                Date = date,
-                Status = status,
-                CustomerId = customerId
-            };
+            // Начало транзакции
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
-            await _dbContext.AddAsync(orderEntity);
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                // добавление в Orders
+                var orderEntity = new OrderEntity
+                {
+                    Id = id,
+                    Date = date,
+                    Status = status,
+                    CustomerId = customerId
+                };
+                await _dbContext.AddAsync(orderEntity);
+                await _dbContext.SaveChangesAsync();
+
+                // Обновление Products
+                foreach(var orderProduct in orderQuantities)
+                {
+                    Guid productId = orderProduct.Key;
+                    int productQuantity = orderProduct.Value;
+
+                    await _dbContext.Products
+                        .Where(p => p.Id == productId)
+                        .ExecuteUpdateAsync(p => p.SetProperty(x => x.Quantity, x => x.Quantity - productQuantity));
+                }
+                await _dbContext.SaveChangesAsync();
+
+                foreach (var orderProduct in orderQuantities)
+                {
+                    Guid productId = orderProduct.Key;
+                    int productQuantity = orderProduct.Value;
+                    if(productQuantity > 0)
+                    {
+                        var m2m = new ProductOrderEntity
+                        {
+                            OrderId = id,
+                            ProductId = productId,
+                            Quantity = productQuantity
+                        };
+                        await _dbContext.AddAsync(m2m);
+                    }
+                }
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         //Обновление

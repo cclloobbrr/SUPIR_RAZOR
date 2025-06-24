@@ -24,5 +24,32 @@
             <input asp-for="NewProduct.Price" />
         </label>
     </div>
+    <div>
+        <label>
+            Quantity:
+            <input asp-for="NewProduct.Quantity" />
+        </label>
+    </div>
     <button type="submit">Add Product</button>
 </form>
+
+<!-- Таблица с данными -->
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Material</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Material</td>
+            <td>@product.Price</td>
+            <td>@product.Quantity</td>
+        </tr>
+    }
+</table>

@@ -15,17 +15,31 @@ namespace SUPIR_RAZOR.Pages
         }
 
         [BindProperty]
-        public List<MasterEntity> Products { get; set; } = new();
+        public List<ProductEntity> Products { get; set; } = new();
 
         [BindProperty]
-        public MasterEntity NewProducts { get; set; } = new();
+        public ProductEntity NewProduct { get; set; } = new();
 
         [BindProperty]
-        public MasterEntity UpdateProducts { get; set; } = new();
+        public ProductEntity UpdateProducts { get; set; } = new();
 
         public async Task OnGetAsync()
         {
             Products = await _repository.GetAll();
         }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                Products = await _repository.GetAll();
+                return RedirectToPage(); ;
+            }
+
+            await _repository.Add(Guid.NewGuid(), NewProduct.Name, NewProduct.Material, NewProduct.Price, NewProduct.Quantity);
+            return RedirectToPage();
+        }
+
+
     }
 }
