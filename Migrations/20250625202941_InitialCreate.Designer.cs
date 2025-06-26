@@ -12,7 +12,7 @@ using SUPIR_RAZOR.Data;
 namespace SUPIR_RAZOR.Migrations
 {
     [DbContext(typeof(SUPIR_RAZORDbContext))]
-    [Migration("20250601102507_InitialCreate")]
+    [Migration("20250625202941_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
